@@ -19,46 +19,6 @@ public ListNode middleNode(ListNode head) {
 	return curNode;
 }
 
-/*-----------------------------------------------------------*/
-// little improve
-
-public ListNode middleNode(ListNode head) {
-	ListNode curNode = head;
-	int count = 0;
-
-	while(curNode != null){
-		count++; // count length of linkedList
-		curNode = curNode.next; 
-	}
-
-	curNode = head;
-	while(curNode != count/2){ //middle = count/2
-		curNode = curNode.next;
-	}
-
-	return curNode;
-}
-
-/*-----------------------------------------------------------*/
-// little improve
-
-public ListNode middleNode(ListNode head) {
-	ListNode curNode = head;
-	int count = 0;
-
-	while(curNode != null){
-		count++; // count length of linkedList
-		curNode = curNode.next; 
-	}
-
-	curNode = head;
-  int mid = count/2;
-	while(curNode != mid){ //middle = count/2
-		curNode = curNode.next;
-	}
-
-	return curNode;
-}
 
 /*-----------------------------------------------------------*/
 // Two pointer - Best Method

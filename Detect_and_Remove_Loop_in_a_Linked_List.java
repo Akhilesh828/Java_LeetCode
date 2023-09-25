@@ -6,21 +6,35 @@ all other nodes to detect if there is a loop. This method is not efficient as it
 time complexity of O(n^2) where n is the number of nodes in the linked list.
 
   /////////////////////////////code///////////////////////////////////
-public boolean detectLoop(Node head) {
-    Node current = head;
-    while (current != null) {
-        Node nextNode = current.next;
-        while (nextNode != null) {
-            if (current == nextNode) {
-                return true; // Loop detected
-            }
-            nextNode = nextNode.next;
-        }
-        current = current.next;
-    }
-    return false; // No loop detected
-}
+void detectAndRemoveLoop(Node head) {
+    Node slow = head;
+    Node fast = head;
+    boolean loopDetected = false;
 
+    while (slow != null && fast != null && fast.next != null) {
+        slow = slow.next;
+        fast = fast.next.next;
+
+        // If fast pointer meets slow pointer, a loop is detected
+        if (slow == fast) {
+            loopDetected = true;
+            break;
+        }
+    }
+
+    // If a loop is detected, remove it
+    if (loopDetected) {
+        slow = head;
+        while (slow.next != fast.next) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+
+        // Set the next node of the fast pointer to null to remove the loop
+        fast.next = null;
+    }
+}
+// O(n^2) O(1)
 /*-----------------------------------------------------------------------------*/
 
 2nd Method :- Efficient Method (Floyd's Cycle Detection Algorithm):

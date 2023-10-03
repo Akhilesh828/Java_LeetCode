@@ -62,6 +62,7 @@ class Solution {
     }
 }
 ```
+
 # Complexity
 #### Time complexity: O(N) ;
 - The time complexity of the brute-force approach is O(N), where N is the total number of nodes in the doubly linked list. This is because we visit each node exactly once while flattening the list.
@@ -70,6 +71,8 @@ class Solution {
 
 > This brute-force approach recursively flattens the nested doubly linked list. However, it can be inefficient for large input lists with deep nesting because of the recursion overhead.
 
+---------------------------------------------------------------------------------------------------------
+    
 # 2nd Method :- Efficient Method
 >To optimize the solution, we can use an iterative approach without recursion. Here's the step-by-step explanation:
 
@@ -131,3 +134,102 @@ This efficient approach uses an iterative process with a stack to flatten the ne
 - The time complexity of the efficient approach is also O(N), where N is the total number of nodes in the doubly linked list. This is because we traverse each node in the list exactly once.
 #### Space complexity: O(1) ;
 - The space complexity of the efficient approach is O(1) because we use a constant amount of extra space, mainly for variables like current, stack, and temporary pointers. The space used is independent of the input size and does not depend on the depth of nesting. Therefore, it is a constant space algorithm.
+
+
+
+================================================================================================
+Brute force using Dummy Approach
+``` Java []
+public class Solution {
+    public Node flatten(Node head) {
+        if (head == null) {
+            return null;
+        }
+        
+        Node dummy = new Node(); // Create a dummy node to serve as the new head.
+        dummy.next = head;
+        head.prev = dummy;
+        
+        flattenRecursive(dummy, head); // Start flattening from the dummy node.
+        
+        dummy.next.prev = null; // Remove the dummy node from the final list.
+        
+        return dummy.next;
+    }
+    
+    private Node flattenRecursive(Node prev, Node current) {
+        if (current == null) {
+            return prev;
+        }
+        
+        Node next = current.next; // Store the next node in the original list.
+        
+        if (current.child != null) {
+            Node child = current.child;
+            current.child = null; // Remove the child pointer.
+            
+            prev.next = child;
+            child.prev = prev;
+            
+            Node tail = flattenRecursive(child, child); // Recursively flatten the child list.
+            
+            tail.next = next;
+            
+            if (next != null) {
+                next.prev = tail;
+            }
+        }
+        
+        return flattenRecursive(current, next);
+    }
+}
+```
+
+
+Efficient Method using Dummy Approach
+``` Java []
+public class Solution {
+    public Node flatten(Node head) {
+        if (head == null) {
+            return null;
+        }
+        
+        Node dummy = new Node(); // Create a dummy node to serve as the new head.
+        dummy.next = head;
+        head.prev = dummy;
+        
+        Node current = dummy;
+        Stack<Node> stack = new Stack<>();
+        
+        while (current != null) {
+            if (current.child != null) {
+                Node next = current.next;
+                Node child = current.child;
+                
+                current.child = null; // Remove the child pointer.
+                
+                current.next = child;
+                child.prev = current;
+                
+                if (next != null) {
+                    stack.push(next); // Push the original next onto the stack.
+                }
+                
+                current = child;
+            } else if (current.next != null) {
+                current = current.next;
+            } else if (!stack.isEmpty()) {
+                Node next = stack.pop();
+                current.next = next;
+                next.prev = current;
+                current = next;
+            } else {
+                current = null;
+            }
+        }
+        
+        dummy.next.prev = null; // Remove the dummy node from the final list.
+        
+        return dummy.next;
+    }
+}

@@ -10,7 +10,7 @@ Steps
   3. Replace the original linked list with the new sorted linked list.
 This approach has a time complexity of O(n) but may require extra space for counting.
 
-  ++++Code+++++
+``` JAVA 
 void sortList(Node head) {
     // initialise count of 0 1 and 2 as 0
     int count[] = { 0, 0, 0 };
@@ -47,6 +47,21 @@ void sortList(Node head) {
         }
     }
 }
+```
+
+Time Complexity: O(n)
+1. First Pass: Counting the number of occurrences of 0, 1, and 2 in the linked list has a time complexity of O(N), where N is the number of elements in the linked list. 
+  This is because you traverse the entire list once.
+
+2. Second Pass: The second while loop iterates through the list again to rearrange the elements based on the counts. 
+  This pass also has a time complexity of O(N) since you go through the list exactly once.
+
+In total, the time complexity of this sorting algorithm is O(N), where N is the number of elements in the linked list.
+
+Space Complexity: O(1)
+The space complexity in this implementation is constant O(1) because the algorithm only uses a fixed-size array 'count' with three elements (count[0], count[1], and count[2]) to keep track of the counts, and it uses a few extra variables. Regardless of the size of the linked list, the space used by the algorithm remains constant.
+
+In summary, this algorithm sorts the linked list in O(N) time complexity and uses O(1) space complexity, making it an efficient in-place sorting algorithm for linked lists with a small range of values.
 
 /*----------------------------------------------------------------------------*/
 
@@ -67,6 +82,7 @@ steps:
 This approach sorts the linked list efficiently without using extra space.
 
   ++++Code+++++
+``` JAVA
 ListNode sortLinkedList(ListNode head) {
     ListNode zero = null, one = null, two = null;
     ListNode current = head;
@@ -125,11 +141,19 @@ ListNode sortLinkedList(ListNode head) {
     
     return head;
 }
+```
+
+# Time Complexity: O(n)
+The algorithm has a time complexity of O(N), where N is the number of nodes in the linked list. This is because it performs a single pass through the entire list while rearranging the nodes based on their values (0, 1, or 2).
+
+# Space Complexity: O(1)
+The algorithm has a space complexity of O(1), meaning it uses a constant amount of extra space, regardless of the size of the input linked list. This is because it only uses a fixed number of pointers (`zero`, `one`, `two`, and `current`) to keep track of different parts of the list and rearranges the nodes in-place. The space used for the pointers does not depend on the size of the input list. Therefore, it's considered an in-place sorting algorithm with constant space complexity.
 
 /*------------------------------------------------------------------------------------------*/
 3rd Method :- Same as above Method but wtring less code by using three references
 
     ++++Code+++++
+``` JAVA
 Node sortList(Node head) {
     // base case
     if (head == null || head.next == null) {
@@ -166,3 +190,15 @@ Node sortList(Node head) {
     // change head
     return first.next;
 }
+```
+
+# Time Complexity: O(n)
+1. The code uses a single pass through the entire linked list, visiting each node once.
+2. For each node, it checks its data value and appends it to one of the three separate lists (0, 1, or 2). This operation is done in constant time, O(1).
+3. After splitting the original list into three sublists, it combines these sublists back together. This is also done in constant time, O(1).
+4. The time complexity of this algorithm is O(n), where n is the number of nodes in the linked list, as it performs a single pass through the list.
+
+# Space Complexity: O(n)
+1. The code uses three dummy nodes (first, second, and third) and three references (zero, one, and two). These dummy nodes and references occupy constant space, O(1).
+2. There is no additional data structure or recursion involved, and the code does not create new nodes or lists. It rearranges the existing nodes in the original list.
+3. The space complexity of this algorithm is O(1), as it uses a fixed and constant amount of space regardless of the size of the input linked list.

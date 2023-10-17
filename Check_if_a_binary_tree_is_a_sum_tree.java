@@ -69,22 +69,12 @@ public class SumTreeChecker {
     }
 }
 ```
-Here's the time and space complexity analysis for the given code:
 
-**Time Complexity:** O(n)
-The time complexity of this code is determined by the number of nodes in the binary tree, as each node is visited once during the recursive traversal.
-- The recursive `isSumTree` function visits each node once, and the work done at each node is constant time.
-- The `sum` function also visits each node once, and its work at each node is constant time.
-Therefore, the overall time complexity of the code is O(n), where 'n' is the number of nodes in the binary tree.
+**Time Complexity:** O(n), where 'n' is the number of nodes in the binary tree.
 
-**Space Complexity:** O(n)
-The space complexity is determined by the depth of the recursive call stack, which depends on the height of the binary tree. 
-In the worst case, when the tree is skewed (i.e., a singly linked list), the space complexity could be O(n), where 'n' is the number of nodes in the tree.
-- The `isSumTree` function uses the call stack for recursion, which can go as deep as the height of the tree.
-- The `sum` function also uses the call stack for recursion, contributing to the overall space complexity.
+**Space Complexity:** O(h), where 'h' is the height of the binary tree. In the worst case, when the tree is skewed, the space complexity can be O(n), but for balanced trees, it is typically O(log n).
 
-In typical balanced binary trees, the space complexity is O(log n), where 'n' is the number of nodes. However, in the worst case, it can be O(n) for skewed trees.
-
+    
 ------------------------------------------------------------------------------------------------------------------------------------------------
 // 2nd Method 
 
@@ -161,17 +151,6 @@ class Main {
 }
 ```
 
-Here's the time and space complexity analysis for the given code:
+**Time Complexity:** O(n), where 'n' is the number of nodes in the binary tree.
 
-**Time Complexity:** O(n)
-The time complexity of this code is determined by the number of nodes in the binary tree, as each node is visited once during the recursive traversal.
-- The recursive `isSumTree` function visits each node once, and the work done at each node is constant time.
-- The `isSumTree` function also calculates the sums of values in the left and right subtrees recursively, but each node is visited only once.
-Therefore, the overall time complexity of the code is O(n), where 'n' is the number of nodes in the binary tree.
-
-**Space Complexity:** O(n)
-The space complexity is determined by the depth of the recursive call stack, which depends on the height of the binary tree. In the worst case, when the tree is skewed (i.e., a singly linked list), the space complexity could be O(n), where 'n' is the number of nodes in the tree.
-- The `isSumTree` function uses the call stack for recursion, which can go as deep as the height of the tree.
-In typical balanced binary trees, the space complexity is O(log n), where 'n' is the number of nodes. However, in the worst case, it can be O(n) for skewed trees.
-
-In addition to the call stack, the code uses a few variables for each recursive call, but these are constant and do not significantly affect the space complexity.
+**Space Complexity:** O(h), where 'h' is the height of the binary tree. In the worst case, when the tree is skewed, the space complexity can be O(n), but for balanced trees, it is typically O(log n).
